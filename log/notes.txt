@@ -1,0 +1,2 @@
+- potential to combine variables: GarageQual + GarageCond,
+OverallCond + OverallQual
