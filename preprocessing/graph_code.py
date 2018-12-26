@@ -1,29 +1,33 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure
 from sklearn import preprocessing
 from datetime import datetime
+import seaborn as sns
 
 # read original train data
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
+dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log) # convert to log scale
+dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log) # convert to log scale
 
 # store response
 y = dfTrain['SalePrice']
 
 def drawBarchart(column, title):
-    # create a list of categories and values
-    categories = [i for i in dfTrain[column].value_counts().index]
-    values = [v for v in dfTrain[column].value_counts()]
-
-    plt.bar(categories, values, align='center', alpha=0.5)
-    plt.title(title)
+    sns.catplot(x=column, kind="count", data=dfTrain,
+                order=list(dfTrain[column].value_counts().index),
+                height=8.27, aspect=11.7/8.27)
+    plt.xticks(rotation=50)
+    plt.title(title, fontsize=15)
+    plt.tight_layout()
     plt.savefig("/home/markg/kaggle/house_prices/graphs/barcharts/" + title +
                 "_barchart.png")
 
 def drawHistogram(column, title):
     binwidth=None
-    binwidth = [x for x in range(0,500000, 10000)] # optional: set binwidth
+    # binwidth = [x for x in range(10, 14, 0.2)] # optional: set binwidth
 
     plt.hist(dfTrain[column], alpha=0.5, bins=binwidth, label=column)
     plt.title(title)
