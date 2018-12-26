@@ -8,7 +8,12 @@ from datetime import datetime
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 
-# # create n-1 dummy variables for 'Embarked' variable
-# dfTrain = pd.get_dummies(dfTrain, columns=['MSSubClass'], prefix=['SubClass'],
-#  drop_first=True)
-# print (dfTrain.info())
+# convert response to log scale
+dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
+
+dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log) # convert to log scale
+
+# create n-1 dummy variables for 'MSSubClass' variable
+dfTrain = pd.get_dummies(dfTrain, columns=['MSSubClass'], prefix=['SubClass'],
+ drop_first=True)
+print (dfTrain.info())
