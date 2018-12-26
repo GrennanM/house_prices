@@ -8,6 +8,9 @@ from datetime import datetime
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 
+# store response
+y = dfTrain['SalePrice']
+
 def drawBarchart(column, title):
     # create a list of categories and values
     categories = [i for i in dfTrain[column].value_counts().index]
@@ -15,7 +18,18 @@ def drawBarchart(column, title):
 
     plt.bar(categories, values, align='center', alpha=0.5)
     plt.title(title)
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/barcharts/" + title + ".png")
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/barcharts/" + title +
+                "_barchart.png")
+
+def drawHistogram(column, title):
+    binwidth=None
+    binwidth = [x for x in range(0,500000, 10000)] # optional: set binwidth
+
+    plt.hist(dfTrain[column], alpha=0.5, bins=binwidth, label=column)
+    plt.title(title)
+    plt.legend(loc='upper right')
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + title +
+                "_histogram.png")
 
 def drawTwoHist(colA, colB, title):
     # plots a double histogram with overlaps
@@ -23,10 +37,18 @@ def drawTwoHist(colA, colB, title):
     plt.hist(dfTrain[colB], alpha=0.5, label=colB)
     plt.legend(loc='upper right')
     plt.title(title)
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + title + ".png")
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + title +
+                "_histogram.png")
 
-def drawHistogram(column, title):
-    plt.hist(dfTrain[column], alpha=0.5, label=column)
+def drawScatter(column, title):
+    plt.scatter(dfTrain[column], y)
+    # plt.xlim(0, 50000) # optional: set x axis limit
+    plt.title(title + "_Vs_SalePrice")
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/" + title +
+                "_scatter.png")
+
+def drawBoxplot(column, title):
+    plt.boxplot(dfTrain[column])
     plt.title(title)
-    plt.legend(loc='upper right')
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + title + ".png")
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/boxplots/" + title +
+                "_boxplot.png")

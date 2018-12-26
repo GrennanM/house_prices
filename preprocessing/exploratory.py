@@ -9,6 +9,7 @@ from graph_code import *
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 # print (dfTrain.info())
+# print (dfTrain['MSSubClass'])
 
 # count the number of different types of variables
 # print (dfTrain.dtypes.value_counts())
@@ -18,6 +19,10 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 
 # sort dataframe by another column
 # print (dfTrain.groupby('MSZoning').count())
+
+# # select features of a certain type
+# for feature in dfTrain.select_dtypes(include=[object]):
+#     drawBarchart(str(feature), title=str(feature) + "_barchart")
 
 # ################# Missing Values ################################
 #
@@ -36,10 +41,4 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 # ################# END Missing Values ##############################
 
 # drawTwoHist('OverallCond', 'OverallQual', title="OverallCond_OvverallQual_histogram")
-# drawBarchart('MSZoning', title = "MSZoning_Barchart2")
-# drawHistogram('LotArea', title="LotArea_histogram")
-
-# # create n-1 dummy variables for 'Embarked' variable
-# dfTrain = pd.get_dummies(dfTrain, columns=['MSSubClass'], prefix=['SubClass'],
-#  drop_first=True)
-# print (dfTrain.info())
+drawHistogram('SalePrice', title='SalePrice')

@@ -1,2 +1,31 @@
-- potential to combine variables: GarageQual + GarageCond,
-OverallCond + OverallQual
+Go through the starter variables below.
+Draw exploratory plots, look for outliers, check distribution etc.
+Download Seaborn and plot disthist for SalePrice.
+Investigate how to handle MSSubClass? It's catgeorical but given as int.
+
+Starter Variables:
+MSSubClass
+LotArea
+Neighborhood
+GrLivArea
+  TotalBsmtSF
+  11stFlrSF
+  22ndFlrSF
+TotRmsAbvGrd
+FullBath
+PoolArea
+YearBuilt
+
+
+
+Other:
+Potential to combine variables:
+- GarageQual + GarageCond
+- OverallCond + OverallQual
+
+To investigate:
+- Condition1 & Condition2 (look similar?)
+- YearBuilt
+- BsmtFinType1 & BsmtFinType2
+- YrSold
+- is HouseStyle contianed in 11stFlrSF & 22ndFlrSF
