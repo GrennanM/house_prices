@@ -41,4 +41,4 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 # ################# END Missing Values ##############################
 
 # drawTwoHist('OverallCond', 'OverallQual', title="OverallCond_OvverallQual_histogram")
-drawHistogram('SalePrice', title='SalePrice')
+# drawHistogram('SalePrice', title='SalePrice')
