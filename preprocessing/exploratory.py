@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from sklearn import preprocessing
 from datetime import datetime
 from graph_code import *
+from scipy import stats
+import seaborn as sns
 
 # read original train data
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
@@ -11,18 +13,23 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 # print (dfTrain.info())
 # print (dfTrain['MSSubClass'])
 
-# count the number of different types of variables
+# # count the number of different types of variables
 # print (dfTrain.dtypes.value_counts())
 
-# returns count of a categorical variables
-# print (dfTrain['MSZoning'].value_counts())
+# # returns count of a categorical variable
+# print (dfTrain['Neighborhood'].value_counts())
+# print (dfTrain['Neighborhood'].value_counts().index) # list of index in order
 
-# sort dataframe by another column
+# # sort dataframe by another column
 # print (dfTrain.groupby('MSZoning').count())
 
 # # select features of a certain type
 # for feature in dfTrain.select_dtypes(include=[object]):
 #     drawBarchart(str(feature), title=str(feature) + "_barchart")
+
+# # print skewnewss and kurtosis
+# print ("Skew: ", dfTrain['LotArea'].skew())
+# print ("Kurt: ", dfTrain['LotArea'].kurt())
 
 # ################# Missing Values ################################
 #

@@ -4,8 +4,15 @@ Download Seaborn and plot disthist for SalePrice.
 Investigate how to handle MSSubClass? It's catgeorical but given as int.
 
 Starter Variables:
+SalePrice
+  - skewness = 1.88
+  - kurtosis = 6.54
+  - After applying logs: Skew: 0.12, Kurt: 0.81
 MSSubClass
 LotArea
+  - skewness = 12.2
+  - kirtosis = 203
+  - After applying logs: Skew: -0.13, Kurt: 4.7
 Neighborhood
 GrLivArea
   TotalBsmtSF
