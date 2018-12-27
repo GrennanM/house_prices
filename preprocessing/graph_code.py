@@ -25,6 +25,19 @@ def drawBarchart(column, title):
     plt.savefig("/home/markg/kaggle/house_prices/graphs/barcharts/" + title +
                 "_barchart.png")
 
+def drawViolinplot(column, title):
+    # order Neighborhood by median SalePrice
+    result = dfTrain.groupby([column])['SalePrice'].aggregate(np.median).reset_index().sort_values('SalePrice',
+                            ascending=False)
+    sns.violinplot(x=column, y='SalePrice', data=dfTrain,
+                order=result[column])
+    sns.set(style="whitegrid")
+    plt.xticks(rotation=50)
+    plt.title(title, fontsize=15)
+    plt.tight_layout()
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/violinplots/" + title +
+                "_Violinplot.png")
+
 def drawHistogram(column, title):
     binwidth=None
     # binwidth = [x for x in range(10, 14, 0.2)] # optional: set binwidth
