@@ -15,11 +15,13 @@ LotArea
   - After applying logs: Skew: -0.13, Kurt: 4.7
 Neighborhood
 GrLivArea
+  - rquared = 0.50
   TotalBsmtSF
-  11stFlrSF
-  22ndFlrSF
+  1stFlrSF
+  2ndFlrSF
 TotRmsAbvGrd
 FullBath
+  - 9 properties with no bathrooms?!
 PoolArea
 YearBuilt
 

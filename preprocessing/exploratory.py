@@ -11,13 +11,12 @@ import seaborn as sns
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 # print (dfTrain.info())
-# print (dfTrain['MSSubClass'])
 
 # # count the number of different types of variables
 # print (dfTrain.dtypes.value_counts())
 
 # # returns count of a categorical variable
-# print (dfTrain['Neighborhood'].value_counts())
+print (dfTrain['FullBath'].value_counts())
 # print (dfTrain['Neighborhood'].value_counts().index) # list of index in order
 
 # # sort dataframe by another column
@@ -29,7 +28,22 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 
 # # print skewnewss and kurtosis
 # print ("Skew: ", dfTrain['LotArea'].skew())
-# print ("Kurt: ", dfTrain['LotArea'].kurt())
+# print ("Kurt: ", dfTrain['LotArea'].kurt
+
+# # print scatterPlots of livingAreas
+# # prints scatterplots on top of one another
+# livingAreas = ['GrLivArea', '1stFlrSF', '2ndFlrSF','TotalBsmtSF']
+# for i in range(len(livingAreas)):
+#     drawScatter(livingAreas[i], title=str(livingAreas[i]))
+
+# drawViolinplot('FullBath', title='FullBath')
+# drawBarchart('FullBath', title='FullBath')
+
+# # calculate rsquared
+# x = dfTrain['GrLivArea']
+# y = dfTrain['SalePrice']
+# slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
+# print ("r-squared: ", r_value**2)
 
 # ################# Missing Values ################################
 #
