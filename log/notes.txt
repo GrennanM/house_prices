@@ -20,9 +20,12 @@ GrLivArea
   1stFlrSF
   2ndFlrSF
 TotRmsAbvGrd
+  - Skew:  0.68
+  - Kurt:  0.88
 FullBath
   - 9 properties with no bathrooms?!
 PoolArea
+  - only 7 properties with pools (don't include)
 YearBuilt
 
 
