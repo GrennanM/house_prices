@@ -15,17 +15,17 @@ dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log) # convert to log scale
 # store response
 y = dfTrain['SalePrice']
 
-def drawBarchart(column, title):
+def drawBarchart(column):
     sns.catplot(x=column, kind="count", data=dfTrain)
                 # order=list(dfTrain[column].value_counts().index),
                 # height=8.27, aspect=11.7/8.27)
-    # plt.xticks(rotation=50)
-    plt.title(title, fontsize=15)
+    plt.xticks(rotation=50)
+    plt.title(column, fontsize=15)
     plt.tight_layout()
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/barcharts/" + title +
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/barcharts/" + column +
                 "_barchart.png")
 
-def drawViolinplot(column, title):
+def drawViolinplot(column):
     # order Neighborhood by median SalePrice
     # result = dfTrain.groupby([column])['SalePrice'].aggregate(np.median).reset_index().sort_values('SalePrice',
     #                         ascending=False)
@@ -33,19 +33,19 @@ def drawViolinplot(column, title):
                 # order=result[column])
     sns.set(style="whitegrid")
     # plt.xticks(rotation=50)
-    plt.title(title, fontsize=15)
+    plt.title(column, fontsize=15)
     plt.tight_layout()
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/violinplots/" + title +
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/violinplots/" + column +
                 "_Violinplot.png")
 
-def drawHistogram(column, title):
+def drawHistogram(column):
     binwidth=None
     # binwidth = [x for x in range(10, 14, 0.2)] # optional: set binwidth
 
     plt.hist(dfTrain[column], alpha=0.5, bins=binwidth, label=column)
-    plt.title(title)
+    plt.title(column)
     plt.legend(loc='upper right')
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + title +
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + column +
                 "_histogram.png")
 
 def drawTwoHist(colA, colB, title):
@@ -57,17 +57,17 @@ def drawTwoHist(colA, colB, title):
     plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + title +
                 "_histogram.png")
 
-def drawScatter(column, title):
-    sns.scatterplot(x=column, y="SalePrice", data=dfTrain)
-
+def drawScatter(column):
+    sns.scatterplot(x=column, y="SalePrice", data=dfTrain, label=column)
     # plt.xlim(0, 50000) # optional: set x axis limit
-    plt.title(title + "_Vs_SalePrice", fontsize=15)
+    plt.title(column + "_Vs_SalePrice", fontsize=15)
+    plt.legend(loc='upper right')
     plt.tight_layout()
     plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/" + title +
                 "_scatter.png")
 
-def drawBoxplot(column, title):
+def drawBoxplot(column):
     plt.boxplot(dfTrain[column])
-    plt.title(title)
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/boxplots/" + title +
+    plt.title(column)
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/boxplots/" + column +
                 "_boxplot.png")
