@@ -1,6 +1,5 @@
 Go through the starter variables below.
 Draw exploratory plots, look for outliers, check distribution etc.
-Download Seaborn and plot disthist for SalePrice.
 Investigate how to handle MSSubClass? It's catgeorical but given as int.
 
 Starter Variables:
@@ -26,8 +25,13 @@ FullBath
   - 9 properties with no bathrooms?!
 PoolArea
   - only 7 properties with pools (don't include)
+OverallQual
 YearBuilt
+  - how to handle dates? Convert to dummy variable? Bin? This is where I'm at.
 
+YrSold and SaleType showed little relationship with SalePrice
+
+- big correlation plot between x variables and response
 
 
 Other:
