@@ -2,36 +2,37 @@ Go through the starter variables below.
 Draw exploratory plots, look for outliers, check distribution etc.
 Investigate how to handle MSSubClass? It's catgeorical but given as int.
 
-Starter Variables:
+Starter Variables (in order of correlation):
 SalePrice
   - skewness = 1.88
   - kurtosis = 6.54
   - After applying logs: Skew: 0.12, Kurt: 0.81
-MSSubClass
+OverallQual - rsquared = 0.79
+GrLivArea- rquared = 0.50
+  TotalBsmtSF - rquared = 0.38
+  1stFlrSF = rquared =  0.37
+  2ndFlrSF
+GarageCars - rsquared = 0.64
+GarageArea - rsquared = 0.62
+FullBath - rsquared = 0.56
+  - 9 properties with no bathrooms?!
 LotArea
   - skewness = 12.2
   - kirtosis = 203
   - After applying logs: Skew: -0.13, Kurt: 4.7
+YearBuilt
+    - how to handle dates? Convert to dummy variable? Bin? This is where I'm at.
 Neighborhood
-GrLivArea
-  - rquared = 0.50
-  TotalBsmtSF
-  1stFlrSF
-  2ndFlrSF
 TotRmsAbvGrd
   - Skew:  0.68
   - Kurt:  0.88
-FullBath
-  - 9 properties with no bathrooms?!
+
 PoolArea
   - only 7 properties with pools (don't include)
-OverallQual
-YearBuilt
-  - how to handle dates? Convert to dummy variable? Bin? This is where I'm at.
+
+
 
 YrSold and SaleType showed little relationship with SalePrice
-
-- big correlation plot between x variables and response
 
 
 Other:
