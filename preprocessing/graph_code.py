@@ -10,7 +10,7 @@ import seaborn as sns
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 # dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log) # convert to log scale
-dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log) # convert to log scale
+# dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log) # convert to log scale
 
 # store response
 y = dfTrain['SalePrice']
@@ -48,6 +48,14 @@ def drawHistogram(column):
     plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + column +
                 "_histogram.png")
 
+def drawDistplot(column):
+    # adds a distribution plot on top of histogram
+    sns.distplot(dfTrain[column], label=column)
+    plt.title(column)
+    plt.legend(loc='upper right')
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/histograms/" + column +
+                "_histogram.png")
+
 def drawTwoHist(colA, colB, title):
     # plots a double histogram with overlaps
     plt.hist(dfTrain[colA], alpha=0.5, label=colA)
@@ -63,11 +71,42 @@ def drawScatter(column):
     plt.title(column + "_Vs_SalePrice", fontsize=15)
     plt.legend(loc='upper right')
     plt.tight_layout()
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/" + title +
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/" + column +
                 "_scatter.png")
+
+def drawHeatmap():
+    corrmat = dfTrain.corr()
+
+    # Generate a mask to remove upper triangle
+    mask = np.zeros_like(corrmat, dtype=np.bool)
+    mask[np.triu_indices_from(mask)] = True
+
+    f, ax = plt.subplots(figsize=(12, 9))
+    sns.heatmap(corrmat, vmax=.8, mask=mask, square=True, cmap="YlGnBu",
+                linewidths=.5)
+    plt.tight_layout()
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/heatmap.png")
 
 def drawBoxplot(column):
     plt.boxplot(dfTrain[column])
     plt.title(column)
     plt.savefig("/home/markg/kaggle/house_prices/graphs/boxplots/" + column +
                 "_boxplot.png")
+
+# # zoomed in heatmap
+# k = 10 # number of variables for heatmap
+# corrmat = dfTrain.corr()
+# cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
+# cm = np.corrcoef(dfTrain[cols].values.T)
+# sns.set(font_scale=1.25)
+# hm = sns.heatmap(cm, cbar=True, annot=True, square=True, fmt='.2f',
+#     annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
+# plt.tight_layout()
+# plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/heatmap_zoomed.png")
+
+# # # draw pairplot
+# sns.pairplot(data=dfTrain, vars=['SalePrice', 'OverallQual', 'GrLivArea',
+#                         'GarageCars', 'FullBath', 'LotArea', 'YearBuilt'],
+#                         height=1.8)
+# plt.tight_layout()
+# plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/pairplot.png")
