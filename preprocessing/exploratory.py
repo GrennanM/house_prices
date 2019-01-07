@@ -36,13 +36,8 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 # for i in range(len(livingAreas)):
 #     drawScatter(livingAreas[i], title=str(livingAreas[i]))
 
-test = ['YrSold', 'SaleType']
-for t in test:
-    drawViolinplot(str(t))
-    drawBarchart(str(t))
-
 # # calculate rsquared
-# x = dfTrain['GrLivArea']
+# x = dfTrain['1stFlrSF']
 # y = dfTrain['SalePrice']
 # slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
 # print ("r-squared: ", r_value**2)
@@ -56,7 +51,6 @@ for t in test:
 # sns.lmplot(x="squaredYearBuilt", y="SalePrice", data=dfTrain)
 # plt.show()
 
-
 # ################# Missing Values ################################
 #
 # # list of features with missing values
@@ -66,12 +60,15 @@ for t in test:
 # dictFeaturesWithMissingValues = {feature: dfTrain[feature].isna().sum()
 #                                     for feature in featuresWithMissingValues}
 #
-# # prints features with missing values and the count of missing values
-# for feature in dfTrain:
-#     if dfTrain[feature].isna().sum() != 0:
-#         print (str(feature) + ": " + str(dfTrain[feature].isna().sum()))
-#
-# ################# END Missing Values ##############################
+# sorted column of features with the sum of their missing values
+totalNumberMissingValues = dfTrain.isna().sum().sort_values(ascending=False)
 
-# drawTwoHist('OverallCond', 'OverallQual', title="OverallCond_OvverallQual_histogram")
-# drawHistogram('SalePrice', title='SalePrice')
+# percentage of missing data
+percentMissingData = (dfTrain.isna().sum()/len(dfTrain.index)).sort_values(ascending=False)
+
+# table of missing data and percentage
+missingData = pd.concat([totalNumberMissingValues, percentMissingData],
+                        axis = 1, keys=['Total', 'Percentage'])
+print (missingData.head(20))
+
+# ################# END Missing Values ##############################
