@@ -9,8 +9,11 @@ import seaborn as sns
 # read original train data
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
-# dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log) # convert to log scale
-# dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log) # convert to log scale
+
+# convert response, LotArea and GrLivArea to log scale
+dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
+dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log)
+dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
 
 # store response
 y = dfTrain['SalePrice']
@@ -71,8 +74,8 @@ def drawScatter(column):
     plt.title(column + "_Vs_SalePrice", fontsize=15)
     plt.legend(loc='upper right')
     plt.tight_layout()
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/" + column +
-                "_scatter.png")
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/individual"
+                + column + "_scatter.png")
 
 def drawHeatmap():
     corrmat = dfTrain.corr()
