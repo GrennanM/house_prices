@@ -8,15 +8,14 @@ from datetime import datetime
 dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 
-# convert response to log scale
+# convert response, LotArea and GrLivArea to log scale
 dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
+dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log)
+dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
 
-dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log) # convert to log scale
-
-# # create n-1 dummy variables for 'MSSubClass' variable
-# dfTrain = pd.get_dummies(dfTrain, columns=['MSSubClass'], prefix=['SubClass'],
-#  drop_first=True)
-
+# # remove 2 outliers (see GrLivArea scatterplot)
+# print (dfTrain.sort_values(by = 'GrLivArea', ascending=False)[:2])
+dfTrain.drop([524, 1299], axis=0, inplace=True)
 
 ######################## Missing Values ####################
 
@@ -32,3 +31,17 @@ featuresWithMissingValues = [feature for feature in dfTrain
 dfTrain.drop(columns=featuresWithMissingValues, inplace=True)
 
 ######################## END Missing Values ####################
+
+# maybe include TotRmsAbvGrd
+starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
+                'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood']
+
+# create dataframe with just chosen features
+dfTrain = dfTrain[starterVars]
+
+# need to include YearBuilt. Currently here!!
+catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood']
+
+# get dummy variables for catgeorical features
+dfTrain = pd.get_dummies(dfTrain, columns=catgVars, drop_first=True)
+print (dfTrain.info())
