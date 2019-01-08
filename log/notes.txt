@@ -3,25 +3,33 @@ Draw exploratory plots, look for outliers, check distribution etc.
 Investigate how to handle MSSubClass? It's catgeorical but given as int.
 
 Starter Variables (in order of correlation):
+
 SalePrice
   - skewness = 1.88
   - kurtosis = 6.54
   - After applying logs: Skew: 0.12, Kurt: 0.81
-OverallQual - rsquared = 0.79
-GrLivArea- rquared = 0.50
-  TotalBsmtSF - rquared = 0.38
-  1stFlrSF = rquared =  0.37
-  2ndFlrSF
-GarageCars - rsquared = 0.64
-GarageArea - rsquared = 0.62
-FullBath - rsquared = 0.56
+OverallQual
+  - rsquared = 0.79
+GrLivArea
+  - rquared = 0.50
+  - transformed to log scale
+TotalBsmtSF
+  - rquared = 0.38
+  - skew: 1.5, kurt: 13.2
+1stFlrSF = rquared =  0.37
+2ndFlrSF
+GarageCars
+  - rsquared = 0.64
+GarageArea
+  - rsquared = 0.62
+FullBath
+  - rsquared = 0.56
   - 9 properties with no bathrooms?!
 LotArea
   - skewness = 12.2
   - kirtosis = 203
   - After applying logs: Skew: -0.13, Kurt: 4.7
 YearBuilt
-    - how to handle dates? Convert to dummy variable? Bin? This is where I'm at.
 Neighborhood
 TotRmsAbvGrd
   - Skew:  0.68
