@@ -44,6 +44,15 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 # slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
 # print ("r-squared: ", r_value**2)
 
+# ################ working on below....
+# print ("Original: ", dfTrain['YearBuilt'].head(10))
+dfTrain['squaredYearBuilt'] = dfTrain['YearBuilt']**2
+# print ("-"*20)
+# print ("Squared: ", dfTrain['squaredYearBuilt'].head(10))
+
+## working on binning squared year built 
+print (pd.cut(dfTrain['squaredYearBuilt'], 10))
+
 # ################# Missing Values ################################
 #
 # # list of features with missing values
