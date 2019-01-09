@@ -69,12 +69,17 @@ def drawTwoHist(colA, colB, title):
                 "_histogram.png")
 
 def drawScatter(column):
-    sns.scatterplot(x=column, y="SalePrice", data=dfTrain, label=column)
+    # to include a regression line
+    sns.lmplot(x=column, y="SalePrice", data=dfTrain)
+
+    # # to include just scatterplot with legend
+    # sns.scatterplot(x=column, y="SalePrice", data=dfTrain, label=column)
     # plt.xlim(0, 50000) # optional: set x axis limit
+    # plt.legend(loc='upper right')
+
     plt.title(column + "_Vs_SalePrice", fontsize=15)
-    plt.legend(loc='upper right')
     plt.tight_layout()
-    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/individual"
+    plt.savefig("/home/markg/kaggle/house_prices/graphs/scatterPlots/individual/"
                 + column + "_scatter.png")
 
 def drawHeatmap():
