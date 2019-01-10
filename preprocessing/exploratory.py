@@ -37,21 +37,17 @@ dfTrain = pd.read_csv(dataTrain, index_col=0)
 #     drawScatter(livingAreas[i], title=str(livingAreas[i]))
 
 # # calculate rsquared
-# dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
+# dfTrain['squaredYearBuilt'] = dfTrain['YearBuilt']**2
 # dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
-# x = dfTrain['GrLivArea']
+# x = dfTrain['YearBuilt']
 # y = dfTrain['SalePrice']
 # slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
 # print ("r-squared: ", r_value**2)
 
-# ################ working on below....
-# print ("Original: ", dfTrain['YearBuilt'].head(10))
-dfTrain['squaredYearBuilt'] = dfTrain['YearBuilt']**2
-# print ("-"*20)
-# print ("Squared: ", dfTrain['squaredYearBuilt'].head(10))
-
-## working on binning squared year built 
-print (pd.cut(dfTrain['squaredYearBuilt'], 10))
+# select an individual value from scatter plot YearBuilt
+# df1 = dfTrain[['YearBuilt', 'SalePrice']] # create new df with selected columns
+# print (df1.sort_values(by = 'YearBuilt'))
+# dfTrain.drop([186], axis=0, inplace=True) # see YearBuilt scatterplot
 
 # ################# Missing Values ################################
 #
