@@ -13,9 +13,10 @@ dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
 dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log)
 dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
 
-# # remove 2 outliers (see GrLivArea scatterplot)
-# print (dfTrain.sort_values(by = 'GrLivArea', ascending=False)[:2])
-dfTrain.drop([524, 1299], axis=0, inplace=True)
+# # remove 3 outliers
+# print (dfTrain.sort_values(by = 'GrLivArea', ascending=False)[:2]) # selects first two rows
+dfTrain.drop([524, 1299], axis=0, inplace=True) # see GrLivArea scatterplot
+dfTrain.drop([186], axis=0, inplace=True) # see YearBuilt scatterplot
 
 ######################## Missing Values ####################
 
@@ -32,6 +33,21 @@ dfTrain.drop(columns=featuresWithMissingValues, inplace=True)
 
 ######################## END Missing Values ####################
 
+# YearBuilt
+# create a column for square of year built (see YearBuilt scatter) & drop original
+dfTrain['squaredYearBuilt'] = dfTrain['YearBuilt']**2
+dfTrain.drop(columns=['YearBuilt'], inplace=True)
+
+# bin squaredYearBuilt into 10 equal sized bins
+dfTrain['squaredYearBuilt'] = pd.cut(dfTrain['squaredYearBuilt'], 10)
+
+# # count number of entries in each bin
+# print (dfTrain['squaredYearBuilt'].value_counts())
+
+# get dummy variables for each bin
+dfTrain = pd.get_dummies(dfTrain, columns=['squaredYearBuilt'], drop_first=True)
+
+## Need to update below to include binned year. Start here!
 # maybe include TotRmsAbvGrd
 starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
                 'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood']
