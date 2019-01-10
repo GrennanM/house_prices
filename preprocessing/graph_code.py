@@ -11,7 +11,7 @@ dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 
 # convert response, LotArea and GrLivArea to log scale
-dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
+# dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
 dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log)
 dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
 
@@ -69,13 +69,13 @@ def drawTwoHist(colA, colB, title):
                 "_histogram.png")
 
 def drawScatter(column):
-    # to include a regression line
-    sns.lmplot(x=column, y="SalePrice", data=dfTrain)
+    # # to include a regression line
+    # sns.lmplot(x=column, y="SalePrice", data=dfTrain)
 
-    # # to include just scatterplot with legend
-    # sns.scatterplot(x=column, y="SalePrice", data=dfTrain, label=column)
+    # to include just scatterplot with legend
+    sns.scatterplot(x=column, y="SalePrice", data=dfTrain, label=column)
     # plt.xlim(0, 50000) # optional: set x axis limit
-    # plt.legend(loc='upper right')
+    plt.legend(loc='upper right')
 
     plt.title(column + "_Vs_SalePrice", fontsize=15)
     plt.tight_layout()
