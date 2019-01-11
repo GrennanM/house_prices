@@ -34,6 +34,8 @@ Neighborhood
 TotRmsAbvGrd
   - Skew:  0.68
   - Kurt:  0.88
+  - Maybe need to look at binning TotRmsAbvGrd greater than 10. i.e. put 10-14
+  together into 1 bin
 
 PoolArea
   - only 7 properties with pools (don't include)
