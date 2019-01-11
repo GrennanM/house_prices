@@ -33,7 +33,14 @@ dfTrain.drop(columns=featuresWithMissingValues, inplace=True)
 
 ######################## END Missing Values ####################
 
-# YearBuilt
+# starter variables
+starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
+                'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood', 'SalePrice',
+                'TotRmsAbvGrd']
+
+# create dataframe with just chosen features
+dfTrain = dfTrain[starterVars]
+
 # create a column for square of year built (see YearBuilt scatter) & drop original
 dfTrain['squaredYearBuilt'] = dfTrain['YearBuilt']**2
 dfTrain.drop(columns=['YearBuilt'], inplace=True)
@@ -41,23 +48,19 @@ dfTrain.drop(columns=['YearBuilt'], inplace=True)
 # bin squaredYearBuilt into 10 equal sized bins
 dfTrain['squaredYearBuilt'] = pd.cut(dfTrain['squaredYearBuilt'], 10)
 
-# # count number of entries in each bin
-# print (dfTrain['squaredYearBuilt'].value_counts())
-
-# get dummy variables for each bin
-dfTrain = pd.get_dummies(dfTrain, columns=['squaredYearBuilt'], drop_first=True)
-
-## Need to update below to include binned year. Start here!
-# maybe include TotRmsAbvGrd
-starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
-                'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood']
-
-# create dataframe with just chosen features
-dfTrain = dfTrain[starterVars]
-
-# need to include YearBuilt. Currently here!!
-catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood']
+# categorical variables
+catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
+                'squaredYearBuilt', 'TotRmsAbvGrd']
 
 # get dummy variables for catgeorical features
 dfTrain = pd.get_dummies(dfTrain, columns=catgVars, drop_first=True)
+
+# write working training data to csv
+trainingPath = '/home/markg/kaggle/house_prices/data/working/'
+dataTrainFilename = 'train_' + str(datetime.now().strftime('%d_%m_%Y_%H%M')) + '.csv'
+dfTrain.to_csv(trainingPath + dataTrainFilename, index=False)
+
+# print data info
+print ("Train dataset: ")
 print (dfTrain.info())
+print("-"*30)
