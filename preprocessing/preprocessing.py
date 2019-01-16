@@ -55,12 +55,16 @@ catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
 # get dummy variables for catgeorical features
 dfTrain = pd.get_dummies(dfTrain, columns=catgVars, drop_first=True)
 
+# standardize numeric variables. Working here!! (Not working)
+numeric = ['GrLivArea', 'LotArea']
+dfTrain[numeric] = preprocessing.StandardScaler().fit_transform(dfTrain[numeric])
+
 # write working training data to csv
 trainingPath = '/home/markg/kaggle/house_prices/data/working/'
 dataTrainFilename = 'train_' + str(datetime.now().strftime('%d_%m_%Y_%H%M')) + '.csv'
 dfTrain.to_csv(trainingPath + dataTrainFilename, index=False)
 
-# print data info
-print ("Train dataset: ")
-print (dfTrain.info())
-print("-"*30)
+# # print data info
+# print ("Train dataset: ")
+# print (dfTrain.info())
+# print("-"*30)
