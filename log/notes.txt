@@ -56,3 +56,5 @@ To investigate:
 - BsmtFinType1 & BsmtFinType2
 - YrSold
 - is HouseStyle contianed in 11stFlrSF & 22ndFlrSF
+
+17/1: Features not lined up between training and testing. Fix this first!
