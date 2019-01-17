@@ -37,15 +37,19 @@ starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
 # create dataframe with just chosen features
 dfTrain = dfTrain[starterVars]
 
-# topcode TotRmsAbvGrd greater than 12 at 12
+# topcode TotRmsAbvGrd and GarageCars
 dfTrain.loc[dfTrain['TotRmsAbvGrd'] > 12, 'TotRmsAbvGrd'] = 12
+dfTrain.loc[dfTrain['TotRmsAbvGrd'] == 3, 'TotRmsAbvGrd'] = 4
+dfTrain.loc[dfTrain['GarageCars'] > 3, 'GarageCars'] = 3
 
 # create a column for square of year built (see YearBuilt scatter) & drop original
 dfTrain['squaredYearBuilt'] = dfTrain['YearBuilt']**2
 dfTrain.drop(columns=['YearBuilt'], inplace=True)
 
 # bin squaredYearBuilt into 10 equal sized bins
-dfTrain['squaredYearBuilt'] = pd.cut(dfTrain['squaredYearBuilt'], 10)
+binLabels = [i for i in range(10)]
+dfTrain['squaredYearBuilt'] = pd.cut(dfTrain['squaredYearBuilt'],
+                                    10, labels=binLabels)
 
 # categorical variables
 catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
@@ -61,7 +65,7 @@ dfTrain[numeric] = preprocessing.StandardScaler().fit_transform(dfTrain[numeric]
 # write working training data to csv
 trainingPath = '/home/markg/kaggle/house_prices/data/working/'
 dataTrainFilename = 'train_' + str(datetime.now().strftime('%d_%m_%Y_%H%M')) + '.csv'
-dfTrain.to_csv(trainingPath + dataTrainFilename, index=False)
+dfTrain.to_csv(trainingPath + dataTrainFilename, index=True)
 
 # # print data info
 # print ("Train dataset: ")
