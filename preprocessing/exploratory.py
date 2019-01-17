@@ -8,11 +8,19 @@ from scipy import stats
 import seaborn as sns
 
 # read original train data
-dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
+dataTrain = '/home/markg/kaggle/house_prices/data/working/train_17_01_2019_1526.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
-# print (dfTrain.info())
 
-# # count the number of different types of variables
+# test dataset
+dt = '/home/markg/kaggle/house_prices/data/working/test_17_01_2019_1518.csv'
+test_df = pd.read_csv(dt, encoding='latin-1')
+
+# print features that are different between training and testing datasets
+for feature in test_df:
+    if feature not in dfTrain:
+        print ('Missing: ', feature)
+
+# count the number of different types of variables
 # print (dfTrain.dtypes.value_counts())
 
 # # returns count of a categorical variable
