@@ -18,20 +18,16 @@ dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
 dfTrain.drop([524, 1299], axis=0, inplace=True) # see GrLivArea scatterplot
 dfTrain.drop([186], axis=0, inplace=True) # see YearBuilt scatterplot
 
-######################## Missing Values ####################
-
 # impute mode for single missing value in Electrical column
 dfTrain['Electrical'].fillna(dfTrain['Electrical'].mode().iloc[0],
                             inplace=True)
 
-# list of features with missing values
-featuresWithMissingValues = [feature for feature in dfTrain
-                                if dfTrain[feature].isna().sum() != 0]
-
-# drop columns with missing values
-dfTrain.drop(columns=featuresWithMissingValues, inplace=True)
-
-######################## END Missing Values ####################
+# # list of features with missing values
+# featuresWithMissingValues = [feature for feature in dfTrain
+#                                 if dfTrain[feature].isna().sum() != 0]
+#
+# # drop columns with missing values
+# dfTrain.drop(columns=featuresWithMissingValues, inplace=True)
 
 # starter variables
 starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
@@ -55,7 +51,7 @@ catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
 # get dummy variables for catgeorical features
 dfTrain = pd.get_dummies(dfTrain, columns=catgVars, drop_first=True)
 
-# standardize numeric variables. Working here!! (Not working)
+# standardize numeric variables
 numeric = ['GrLivArea', 'LotArea']
 dfTrain[numeric] = preprocessing.StandardScaler().fit_transform(dfTrain[numeric])
 
