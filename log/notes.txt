@@ -57,4 +57,5 @@ To investigate:
 - YrSold
 - is HouseStyle contianed in 11stFlrSF & 22ndFlrSF
 
-17/1: Features not lined up between training and testing. Fix this first!
+17/1: convert saleprice in for submissions from log scale back to non-log scale.
+Start here!
