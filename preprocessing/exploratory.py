@@ -7,24 +7,33 @@ from graph_code import *
 from scipy import stats
 import seaborn as sns
 
-# read original train data
-dataTrain = '/home/markg/kaggle/house_prices/data/working/train_17_01_2019_1526.csv'
+# # read original training data
+# dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
+# dfTrain = pd.read_csv(dataTrain, index_col=0)
+# print (dfTrain.info())
+
+# # read original test data
+# dataTest = '/home/markg/kaggle/house_prices/data/original/test.csv'
+# dfTest = pd.read_csv(dataTest, index_col=0)
+# print (dfTest.info())
+
+# read working train data
+dataTrain = '/home/markg/kaggle/house_prices/data/working/train_17_01_2019_1733.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
+print ('Train: ')
+print (dfTrain.info())
+print ('-'*30)
 
-# test dataset
-dt = '/home/markg/kaggle/house_prices/data/working/test_17_01_2019_1518.csv'
-test_df = pd.read_csv(dt, encoding='latin-1')
-
-# print features that are different between training and testing datasets
-for feature in test_df:
-    if feature not in dfTrain:
-        print ('Missing: ', feature)
+# read working test dataset
+dt = '/home/markg/kaggle/house_prices/data/working/test_17_01_2019_1721.csv'
+test_df = pd.read_csv(dt, encoding='latin-1', index_col=0)
+print ('Test: ', test_df.info())
 
 # count the number of different types of variables
 # print (dfTrain.dtypes.value_counts())
 
-# # returns count of a categorical variable
-# print (dfTrain['MiscFeature'].value_counts())
+# returns count of a categorical variable
+# print (dfTrain['GarageCars'].value_counts())
 # print (dfTrain['Neighborhood'].value_counts().index) # list of index in order
 
 # # sort dataframe by another column
@@ -57,7 +66,7 @@ for feature in test_df:
 # print (df1.sort_values(by = 'YearBuilt'))
 # dfTrain.drop([186], axis=0, inplace=True) # see YearBuilt scatterplot
 
-# ################# Missing Values ################################
+# ################ Missing Values ################################
 #
 # # list of features with missing values
 # featuresWithMissingValues = [feature for feature in dfTrain
