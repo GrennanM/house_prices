@@ -37,6 +37,9 @@ starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
 # create dataframe with just chosen features
 dfTrain = dfTrain[starterVars]
 
+# topcode TotRmsAbvGrd greater than 12 at 12
+dfTrain.loc[dfTrain['TotRmsAbvGrd'] > 12] = 12
+
 # create a column for square of year built (see YearBuilt scatter) & drop original
 dfTrain['squaredYearBuilt'] = dfTrain['YearBuilt']**2
 dfTrain.drop(columns=['YearBuilt'], inplace=True)
