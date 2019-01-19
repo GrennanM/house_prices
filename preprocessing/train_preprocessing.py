@@ -16,6 +16,7 @@ dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
 # # remove 3 outliers
 # print (dfTrain.sort_values(by = 'GrLivArea', ascending=False)[:2]) # selects first two rows
 dfTrain.drop([524, 1299], axis=0, inplace=True) # see GrLivArea scatterplot
+dfTrain.drop([692, 1183], axis=0, inplace=True) # remove GrLivArea values larger than 4000, from Author's recomendations
 dfTrain.drop([186], axis=0, inplace=True) # see YearBuilt scatterplot
 
 # impute mode for single missing value in Electrical column
