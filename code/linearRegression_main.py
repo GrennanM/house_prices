@@ -27,7 +27,7 @@ X = df.drop(columns = ['SalePrice'])
 
 ############################ submission ################################
 # test dataset
-dt = '/home/markg/kaggle/house_prices/data/working/test_17_01_2019_1721.csv'
+dt = '/home/markg/kaggle/house_prices/data/working/test_19_01_2019_0805.csv'
 test_df = pd.read_csv(dt, encoding='latin-1', index_col=0)
 
 # prepare Id for submission file
@@ -38,6 +38,7 @@ test_df.drop(columns = ['Id'], inplace = True)
 regr = linear_model.LinearRegression()
 regr.fit(X, y)
 predictions = regr.predict(test_df)
+predictions = np.exp(predictions) # convert from logs back to original scale
 
 # create submission file
 submission = pd.DataFrame({'Id':Id, 'SalePrice':predictions})
