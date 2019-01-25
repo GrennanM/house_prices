@@ -1,0 +1,11 @@
+25/1:
+- Using train_19_01_2019_0857, fitting inital 10 variables and fitting linear
+regression model without tuning.. Error (cross-val):  0.13347
+- kaggle score 0.15024
+- including dfTrain.drop([692, 1183], axis=0, inplace=True) removing these
+ 'outliers' increased the kaggle score to 0.15027
+
+ - adding in OverallCond improved. Error:  0.10698 and kaggle: 0.13570
+ (train_25_01_2019_0829, test_25_01_2019_0834)
+ - adding in Functional. Error:  0.10548, did not improve kaggle: 0.13719
+- come back to LotFrontage
