@@ -10,24 +10,26 @@ import seaborn as sns
 # # read original training data
 # dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 # dfTrain = pd.read_csv(dataTrain, index_col=0)
-# print (dfTrain.info())
+# print (dfTrain['OverallCond'].head())
 
-# # read original test data
-# dataTest = '/home/markg/kaggle/house_prices/data/original/test.csv'
-# dfTest = pd.read_csv(dataTest, index_col=0)
+# read original test data
+dataTest = '/home/markg/kaggle/house_prices/data/original/test.csv'
+dfTest = pd.read_csv(dataTest, index_col=0)
 # print (dfTest.info())
 
-# read working train data
-dataTrain = '/home/markg/kaggle/house_prices/data/working/train_17_01_2019_1733.csv'
-dfTrain = pd.read_csv(dataTrain, index_col=0)
-print ('Train: ')
-print (dfTrain.info())
-print ('-'*30)
+# drawHistogram('LotFrontage')
 
-# read working test dataset
-dt = '/home/markg/kaggle/house_prices/data/working/test_17_01_2019_1721.csv'
-test_df = pd.read_csv(dt, encoding='latin-1', index_col=0)
-print ('Test: ', test_df.info())
+# # read working train data
+# dataTrain = '/home/markg/kaggle/house_prices/data/working/train_17_01_2019_1733.csv'
+# dfTrain = pd.read_csv(dataTrain, index_col=0)
+# print ('Train: ')
+# print (dfTrain.info())
+# print ('-'*30)
+
+# # read working test dataset
+# dt = '/home/markg/kaggle/house_prices/data/working/test_17_01_2019_1721.csv'
+# test_df = pd.read_csv(dt, encoding='latin-1', index_col=0)
+# print ('Test: ', test_df.info())
 
 # count the number of different types of variables
 # print (dfTrain.dtypes.value_counts())
@@ -43,9 +45,9 @@ print ('Test: ', test_df.info())
 # for feature in dfTrain.select_dtypes(include=[object]):
 #     drawBarchart(str(feature), title=str(feature) + "_barchart")
 
-# # print skewnewss and kurtosis
-# print ("Skew: ", dfTrain['TotalBsmtSF'].skew())
-# print ("Kurt: ", dfTrain['TotalBsmtSF'].kurt())
+# # # print skewnewss and kurtosis
+# print ("Skew: ", dfTrain['LotFrontage'].skew())
+# print ("Kurt: ", dfTrain['LotFrontage'].kurt())
 
 # # print scatterPlots of livingAreas
 # prints scatterplots on top of one another
@@ -62,8 +64,8 @@ print ('Test: ', test_df.info())
 # print ("r-squared: ", r_value**2)
 
 # select an individual value from scatter plot YearBuilt
-# df1 = dfTrain[['YearBuilt', 'SalePrice']] # create new df with selected columns
-# print (df1.sort_values(by = 'YearBuilt'))
+df1 = dfTrain[['LotFrontage', 'SalePrice']] # create new df with selected columns
+print (df1.sort_values(by = 'LotFrontage'))
 # dfTrain.drop([186], axis=0, inplace=True) # see YearBuilt scatterplot
 
 # ################ Missing Values ################################
@@ -75,7 +77,7 @@ print ('Test: ', test_df.info())
 # dictFeaturesWithMissingValues = {feature: dfTrain[feature].isna().sum()
 #                                     for feature in featuresWithMissingValues}
 #
-# sorted column of features with the sum of their missing values
+# # sorted column of features with the sum of their missing values
 # totalNumberMissingValues = dfTrain.isna().sum().sort_values(ascending=False)
 #
 # # percentage of missing data
@@ -84,6 +86,6 @@ print ('Test: ', test_df.info())
 # # table of missing data and percentage
 # missingData = pd.concat([totalNumberMissingValues, percentMissingData],
 #                         axis = 1, keys=['Total', 'Percentage'])
-# print (missingData.head(20))
+# print (missingData.head(50))
 
 # ################# END Missing Values ##############################

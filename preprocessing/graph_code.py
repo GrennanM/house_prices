@@ -11,9 +11,13 @@ dataTrain = '/home/markg/kaggle/house_prices/data/original/train.csv'
 dfTrain = pd.read_csv(dataTrain, index_col=0)
 
 # convert response, LotArea and GrLivArea to log scale
-# dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
+dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
 dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log)
 dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
+
+# removing outliers
+dfTrain.drop([524, 1299], axis=0, inplace=True) # see GrLivArea scatterplot
+dfTrain.drop([692, 1183], axis=0, inplace=True)
 
 # store response
 y = dfTrain['SalePrice']
@@ -75,7 +79,7 @@ def drawScatter(column):
     # to include just scatterplot with legend
     sns.scatterplot(x=column, y="SalePrice", data=dfTrain, label=column)
     # plt.xlim(0, 50000) # optional: set x axis limit
-    plt.legend(loc='upper right')
+    # plt.legend(loc='upper right')
 
     plt.title(column + "_Vs_SalePrice", fontsize=15)
     plt.tight_layout()
