@@ -12,13 +12,15 @@ dfTest = pd.read_csv(dataTest)
 dfTest['LotArea'] = dfTest['LotArea'].apply(np.log)
 dfTest['GrLivArea'] = dfTest['GrLivArea'].apply(np.log)
 
-# impute mean for single missing value in TotalBsmtSF column
+# impute for missing values
 dfTest['TotalBsmtSF'].fillna(dfTest['TotalBsmtSF'].mean(), inplace=True)
 dfTest['GarageCars'].fillna(dfTest['GarageCars'].median(), inplace=True)
+dfTest['Functional'].fillna(dfTest['Functional'].mode(), inplace=True)
 
 # starter variables
 starterVars = ['Id', 'OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
-                'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood', 'TotRmsAbvGrd']
+                'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood', 'TotRmsAbvGrd',
+                'OverallCond']
 
 # create dataframe with just chosen features
 dfTest = dfTest[starterVars]
@@ -42,7 +44,7 @@ dfTest['squaredYearBuilt'] = pd.cut(dfTest['squaredYearBuilt'],
 
 # categorical variables
 catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
-                'squaredYearBuilt', 'TotRmsAbvGrd']
+                'squaredYearBuilt', 'TotRmsAbvGrd', 'OverallCond']
 
 # get dummy variables for catgeorical features
 dfTest = pd.get_dummies(dfTest, columns=catgVars, drop_first=True)

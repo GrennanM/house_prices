@@ -13,7 +13,7 @@ dfTrain['SalePrice'] = dfTrain['SalePrice'].apply(np.log)
 dfTrain['LotArea'] = dfTrain['LotArea'].apply(np.log)
 dfTrain['GrLivArea'] = dfTrain['GrLivArea'].apply(np.log)
 
-# # remove 3 outliers
+# # remove outliers
 # print (dfTrain.sort_values(by = 'GrLivArea', ascending=False)[:2]) # selects first two rows
 dfTrain.drop([524, 1299], axis=0, inplace=True) # see GrLivArea scatterplot
 dfTrain.drop([692, 1183], axis=0, inplace=True) # remove GrLivArea values larger than 4000, from Author's recomendations
@@ -33,7 +33,7 @@ dfTrain['Electrical'].fillna(dfTrain['Electrical'].mode().iloc[0],
 # starter variables
 starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
                 'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood', 'SalePrice',
-                'TotRmsAbvGrd']
+                'TotRmsAbvGrd', 'OverallCond']
 
 # create dataframe with just chosen features
 dfTrain = dfTrain[starterVars]
@@ -54,7 +54,7 @@ dfTrain['squaredYearBuilt'] = pd.cut(dfTrain['squaredYearBuilt'],
 
 # categorical variables
 catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
-                'squaredYearBuilt', 'TotRmsAbvGrd']
+                'squaredYearBuilt', 'TotRmsAbvGrd', 'OverallCond']
 
 # get dummy variables for catgeorical features
 dfTrain = pd.get_dummies(dfTrain, columns=catgVars, drop_first=True)
