@@ -23,17 +23,10 @@ dfTrain.drop([186], axis=0, inplace=True) # see YearBuilt scatterplot
 dfTrain['Electrical'].fillna(dfTrain['Electrical'].mode().iloc[0],
                             inplace=True)
 
-# # list of features with missing values
-# featuresWithMissingValues = [feature for feature in dfTrain
-#                                 if dfTrain[feature].isna().sum() != 0]
-#
-# # drop columns with missing values
-# dfTrain.drop(columns=featuresWithMissingValues, inplace=True)
-
 # starter variables
 starterVars = ['OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
                 'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood', 'SalePrice',
-                'TotRmsAbvGrd', 'OverallCond']
+                'TotRmsAbvGrd', 'OverallCond', 'BsmtFinType1']
 
 # create dataframe with just chosen features
 dfTrain = dfTrain[starterVars]
@@ -58,6 +51,10 @@ catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
 
 # get dummy variables for catgeorical features
 dfTrain = pd.get_dummies(dfTrain, columns=catgVars, drop_first=True)
+
+# get dummy for BsmtFinType1 including a column for NAs
+dfTrain = pd.get_dummies(dfTrain, columns=['BsmtFinType1'], drop_first=True,
+                        dummy_na=True)
 
 # standardize numeric variables
 numeric = ['GrLivArea', 'LotArea']
