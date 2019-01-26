@@ -20,7 +20,7 @@ dfTest['Functional'].fillna(dfTest['Functional'].mode(), inplace=True)
 # starter variables
 starterVars = ['Id', 'OverallQual', 'GrLivArea', 'TotalBsmtSF', 'GarageCars',
                 'FullBath', 'LotArea', 'YearBuilt', 'Neighborhood', 'TotRmsAbvGrd',
-                'OverallCond']
+                'OverallCond', 'BsmtFinType1']
 
 # create dataframe with just chosen features
 dfTest = dfTest[starterVars]
@@ -48,6 +48,10 @@ catgVars = ['OverallQual', 'GarageCars', 'FullBath', 'Neighborhood',
 
 # get dummy variables for catgeorical features
 dfTest = pd.get_dummies(dfTest, columns=catgVars, drop_first=True)
+
+# get dummy for BsmtFinType1 including a column for NAs
+dfTest = pd.get_dummies(dfTest, columns=['BsmtFinType1'], drop_first=True,
+                        dummy_na=True)
 
 # standardize numeric variables
 numeric = ['GrLivArea', 'LotArea']
