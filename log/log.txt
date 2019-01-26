@@ -11,6 +11,9 @@ regression model without tuning.. Error (cross-val):  0.13347
 - come back to LotFrontage
 
 26/1:
-- included BsmtFinType1, Error:  0.100, kaggle: 0.13168, new best!
+- included BsmtFinType1, Error:  0.100, kaggle: 0.13168, new best.
 (train_26_01_2019_2242, test_26_01_2019_2245)
-- noticed TotalBsmtSF has not been standardized, fix
+- standardized TotalBsmtSF (was missing before), kaggle: 0.13166 new best.
+(train_26_01_2019_2312, test_26_01_2019_2310)
+- error with training linear regression, convert response from log scale back to
+original, fix
