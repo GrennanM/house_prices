@@ -9,3 +9,8 @@ regression model without tuning.. Error (cross-val):  0.13347
  (train_25_01_2019_0829, test_25_01_2019_0834)
  - adding in Functional. Error:  0.10548, did not improve kaggle: 0.13719
 - come back to LotFrontage
+
+26/1:
+- included BsmtFinType1, Error:  0.100, kaggle: 0.13168, new best!
+(train_26_01_2019_2242, test_26_01_2019_2245)
+- noticed TotalBsmtSF has not been standardized, fix
