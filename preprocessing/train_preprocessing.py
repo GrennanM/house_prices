@@ -57,7 +57,7 @@ dfTrain = pd.get_dummies(dfTrain, columns=['BsmtFinType1'], drop_first=True,
                         dummy_na=True)
 
 # standardize numeric variables
-numeric = ['GrLivArea', 'LotArea']
+numeric = ['GrLivArea', 'LotArea', 'TotalBsmtSF']
 dfTrain[numeric] = preprocessing.StandardScaler().fit_transform(dfTrain[numeric])
 
 # write working training data to csv

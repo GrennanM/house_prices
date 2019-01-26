@@ -54,7 +54,7 @@ dfTest = pd.get_dummies(dfTest, columns=['BsmtFinType1'], drop_first=True,
                         dummy_na=True)
 
 # standardize numeric variables
-numeric = ['GrLivArea', 'LotArea']
+numeric = ['GrLivArea', 'LotArea', 'TotalBsmtSF']
 dfTest[numeric] = preprocessing.StandardScaler().fit_transform(dfTest[numeric])
 
 # write working Test data to csv
