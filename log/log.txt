@@ -15,5 +15,10 @@ regression model without tuning.. Error (cross-val):  0.13347
 (train_26_01_2019_2242, test_26_01_2019_2245)
 - standardized TotalBsmtSF (was missing before), kaggle: 0.13166 new best.
 (train_26_01_2019_2312, test_26_01_2019_2310)
-- error with training linear regression, convert response from log scale back to
-original, fix
+
+27/1:
+- to do: convert all skewed numerical variables with log1p
+
+28/1:
+- including log transform or standardizing TotalBsmtSF gives strange error in results
+- removing both makes result plausible again.. ?!
